@@ -4,8 +4,11 @@ import User from "../schemas/userProfile.js";
 export const login = async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = await User.findOne();
-        res.send(user);
+        const user = await User.findOne({username: username, password: password});
+        if(user){
+            req.session.isAuth= true;
+            res.send(user);}
+        else res.send("Invalid username or password");
     }
     catch (err) {
         console.log(err);
@@ -26,4 +29,3 @@ export const register = async (req, res) => {
     res.send(user);
 }
 
-// 

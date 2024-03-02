@@ -6,8 +6,9 @@ import cookieParser from 'cookie-parser';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import routers from './routes/index.js';
+import router from './routes/route.js';
 import {connectDB} from "./dbConfig/db.js"
+import {isAuth} from "./middlewares/isAuth.js"
 const app = express();
 dotenv.config();
 // session key setup
@@ -22,7 +23,11 @@ connectDB();
 
 
 app.use(express.json());
-app.use('/api',routers);
+app.get('/',isAuth, (req, res) => {
+	res.send({message: "Welcome to the Home page"});
+}
+);
+app.use('/api',router);
 app.listen(process.env.PORT, () => {
 	console.log(`Server is running in ${process.env.PORT} mode, under port ${process.env.PORT}.`);
 });
