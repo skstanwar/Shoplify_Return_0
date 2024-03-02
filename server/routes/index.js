@@ -1,6 +1,6 @@
 import express from 'express';
 const userRoutes = express.Router();
-import login from "./APIs/testAPI.js";
+import {login , register} from "../APIs/auth.js";
 userRoutes.post('/login', login);
-
+userRoutes.post('/register', register);
 export default userRoutes;
