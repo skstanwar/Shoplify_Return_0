@@ -6,9 +6,9 @@ import cookieParser from 'cookie-parser';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import router from './routes/route.js';
+import {router ,pagerouter}from './routes/route.js';
 import {connectDB} from "./dbConfig/db.js"
-import {isAuth} from "./middlewares/isAuth.js"
+import  bodyParser from 'body-parser';
 const app = express();
 dotenv.config();
 // session key setup
@@ -29,10 +29,11 @@ app.set('view engine', 'ejs');
 app.set('views', views);
 app.use(express.static(staticPath));
 app.use(express.json());
-app.get('/',(req, res) => {
-	res.render('index.ejs');
-}
-);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+app.use('/' , pagerouter);
 app.use('/api',router);
 app.listen(process.env.PORT, () => {
 	console.log(`Server is running in ${process.env.PORT} mode, under port ${process.env.PORT}.`);

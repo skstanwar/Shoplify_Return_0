@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="posts-container">
+        <h2>Posts</h2>
+        <div class="posts">
+            <% for (let i = posts.length-1; i>=0; i--) { %>
+                <div class="post">
+                    <h6><%= posts[i].author %></h6>
+                    <p><%= posts[i].content %></p>
+                    <p>Likes : <%= posts[i].likes %></p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
