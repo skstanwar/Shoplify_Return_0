@@ -20,11 +20,17 @@ app.use(cookieSession({
 }));
 app.use(cookieParser());
 connectDB();
-
-
+const fileUrl= new URL(import.meta.url);
+const filePath=dirname(fileURLToPath(fileUrl));
+const staticPath = join(filePath,'static');
+const publicPath= join(filePath,'public');
+const views= join(filePath,'views');
+app.set('view engine', 'ejs');	
+app.set('views', views);
+app.use(express.static(staticPath));
 app.use(express.json());
-app.get('/',isAuth, (req, res) => {
-	res.send({message: "Welcome to the Home page"});
+app.get('/',(req, res) => {
+	res.render('index.ejs');
 }
 );
 app.use('/api',router);
