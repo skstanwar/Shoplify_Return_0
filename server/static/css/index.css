@@ -104,7 +104,11 @@ body {
     padding: 20px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
-
+.post img {
+    width: 50%; /* Make the image fill the width of its container */
+    height: 50%; /* Make the image fill the height of its container */
+    object-fit: cover; /* Cover the entire container while maintaining aspect ratio */
+}
 .post h3 {
     margin-top: 0;
 }
